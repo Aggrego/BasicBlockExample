@@ -3,7 +3,7 @@
 
 # BasicBlockExample
 
-This is core example of domain with build-in example.
+This project aims to show minimal value product based on Symfony4 with flex installation.
 
 ## Versioning
  
