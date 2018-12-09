@@ -15,7 +15,6 @@
     "aggrego/domain": "dev-master",
     "aggrego/data-board": "dev-master",
     "aggrego/event-consumer": "dev-master",
-    "timitao/value-object": "dev-master",
     "league/tactician": "^1.0",
     "symfony/console": "^4.2"
   },

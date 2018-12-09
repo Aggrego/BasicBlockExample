@@ -1,0 +1,23 @@
+version: '2'
+services:
+  php:
+    image: php:7.1.19-cli-alpine
+    container_name: php
+    volumes:
+      - ./:/app
+    working_dir: /app
+    depends_on:
+      - neo4j
+
+  composer:
+    image: composer:latest
+    container_name: composer
+    volumes_from:
+      - php
+    working_dir: /app
+
+  neo4j:
+    image: neo4j:3.5
+    ports:
+      - 7474:7474
+      - 7687:7687
