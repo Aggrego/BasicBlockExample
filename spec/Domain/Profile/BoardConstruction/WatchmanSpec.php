@@ -11,10 +11,11 @@
 
 namespace spec\Aggrego\BasicBlockExample\Domain\Profile\BoardConstruction;
 
-use Aggrego\Domain\Profile\BoardConstruction\Watchman as DomainWatchman;
 use Aggrego\BasicBlockExample\Domain\Profile\BoardConstruction\Watchman;
+use Aggrego\BasicBlockExample\Domain\Profile\Factory;
+use Aggrego\Domain\Profile\BoardConstruction\Watchman as DomainWatchman;
+use Aggrego\Domain\Profile\Profile;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class WatchmanSpec extends ObjectBehavior
 {
@@ -22,5 +23,15 @@ class WatchmanSpec extends ObjectBehavior
     {
         $this->shouldHaveType(Watchman::class);
         $this->shouldBeAnInstanceOf(DomainWatchman::class);
+    }
+
+    function it_should_check_profile(): void
+    {
+        $this->isSupported(Factory::factory('1.0'))->shouldBe(true);
+    }
+
+    function it_should_reject_another_profile(): void
+    {
+        $this->isSupported(Profile::createFromName('unknown:1.0'))->shouldBe(false);
     }
 }

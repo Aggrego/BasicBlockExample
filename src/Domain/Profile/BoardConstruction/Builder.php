@@ -13,14 +13,21 @@ declare(strict_types = 1);
 
 namespace Aggrego\BasicBlockExample\Domain\Profile\BoardConstruction;
 
+use Aggrego\DataBoard\Board\Data;
+use Aggrego\DataBoard\Board\Prototype\Board;
 use Aggrego\Domain\Board\Key;
 use Aggrego\Domain\Board\Prototype\Board as BoardPrototype;
 use Aggrego\Domain\Profile\BoardConstruction\Builder as DomainBuilder;
 use Aggrego\Domain\Profile\BoardConstruction\Exception\UnableToBuildBoardException;
 use Aggrego\Domain\Profile\Profile;
+use Assert\Assertion;
+use Exception;
 
-abstract class Builder implements DomainBuilder
+class Builder implements DomainBuilder
 {
+    private const KEY_NAME = 'name';
+    private const KEY_VALUE = 'value';
+
     /** @var Profile */
     private $profile;
 
@@ -36,6 +43,18 @@ abstract class Builder implements DomainBuilder
      */
     public function build(Key $key): BoardPrototype
     {
-        // TODO: Implement build() method.
+        $keyValue = $key->getValue();
+        try {
+            Assertion::keyExists($keyValue, self::KEY_NAME);
+            Assertion::keyExists($keyValue, self::KEY_VALUE);
+        } catch (Exception $e) {
+            throw new UnableToBuildBoardException('Unable to create board due to: ' . $e->getMessage(), 0, $e);
+        }
+
+        return new Board(
+            new Key(['name' => $keyValue[self::KEY_NAME]]),
+            $this->profile,
+            new Data($keyValue[self::KEY_VALUE])
+        );
     }
 }

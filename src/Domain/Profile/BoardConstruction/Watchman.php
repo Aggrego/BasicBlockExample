@@ -13,6 +13,7 @@ declare(strict_types = 1);
 
 namespace Aggrego\BasicBlockExample\Domain\Profile\BoardConstruction;
 
+use Aggrego\BasicBlockExample\Domain\Profile\Factory;
 use Aggrego\Domain\Profile\BoardConstruction\Builder as DomainBuilder;
 use Aggrego\Domain\Profile\BoardConstruction\Watchman as DomainWatchman;
 use Aggrego\Domain\Profile\Profile;
@@ -21,7 +22,7 @@ class Watchman implements DomainWatchman
 {
     public function isSupported(Profile $profile): bool
     {
-        // TODO: Implement isSupported() method.
+        return $profile->getName() === Factory::PROFILE_NAME;
     }
 
     public function passBuilder(Profile $profile): DomainBuilder

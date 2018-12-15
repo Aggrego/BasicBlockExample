@@ -11,10 +11,17 @@
 
 namespace spec\Aggrego\BasicBlockExample\Domain\Profile\BoardTransformation;
 
-use Aggrego\Domain\Profile\BoardTransformation\Transformation as DomainTransformation;
+use Aggrego\AggregateEventConsumer\Uuid;
 use Aggrego\BasicBlockExample\Domain\Profile\BoardTransformation\Transformation;
+use Aggrego\BasicBlockExample\Domain\Profile\Factory;
+use Aggrego\DataBoard\Board\Board;
+use Aggrego\DataBoard\Board\Data;
+use Aggrego\DataBoard\Board\Metadata;
+use Aggrego\DataBoard\Board\Prototype\Board as BoardPrototype;
+use Aggrego\Domain\Board\Key;
+use Aggrego\Domain\Profile\BoardTransformation\Transformation as DomainTransformation;
+use Aggrego\Domain\Profile\BoardTransformation\Exception\UnprocessableBoardException;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class TransformationSpec extends ObjectBehavior
 {
@@ -22,5 +29,33 @@ class TransformationSpec extends ObjectBehavior
     {
         $this->shouldHaveType(Transformation::class);
         $this->shouldBeAnInstanceOf(DomainTransformation::class);
+    }
+
+    function it_should_build_data_prototype()
+    {
+        $key = new Key(['name' => 'test2', 'value' => 'new_test_value']);
+        $board = new Board(
+            new Uuid('7835a2f1-65c4-4e05-aacf-2e9ed950f5f2'),
+            new Key(['name' => 'test']),
+            Factory::factory('1.0'),
+            new Metadata(new Data('test_value')),
+            null
+        );
+        $this->transform($key, $board)->shouldBeAnInstanceOf(BoardPrototype::class);
+    }
+
+    function it_should_throw_exception_with_invalid_key_value()
+    {
+        $key = new Key([]);
+        $board = new Board(
+            new Uuid('7835a2f1-65c4-4e05-aacf-2e9ed950f5f2'),
+            new Key(['name' => 'test']),
+            Factory::factory('1.0'),
+            new Metadata(new Data('test_value')),
+            null
+        );
+        $unableToBuildBoardException = new UnprocessableBoardException('Unable to process board due to: Array does not contain an element with key "value"');
+        $this->shouldThrow($unableToBuildBoardException)
+            ->during('transform', [$key, $board]);
     }
 }
