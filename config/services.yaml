@@ -1,0 +1,67 @@
+services:
+
+# Messanger
+    messanger.basic_block_example.handler.create_board:
+        class: Aggrego\BasicBlockExample\Messanger\Handler\CreateBoardHandler
+        arguments:
+            - "@domain.api.create_board.use_case"
+
+    messanger.basic_block_example.handler.transform_board:
+        class: Aggrego\BasicBlockExample\Messanger\Handler\TransformBoardHandler
+        arguments:
+            - "@domain.api.transform_board.use_case"
+
+# Domain API
+    domain.api.create_board.use_case:
+        class: Aggrego\Domain\Api\Command\CreateBoard\UseCase
+        tags: [{name: messenger.message_handler, handles: Aggrego\Domain\Api\Command\CreateBoard\Command}]
+        arguments:
+            - "@domain.board.repository"
+            - "@domain.board.new_board_factory"
+
+    domain.api.transform_board.use_case:
+        class: Aggrego\Domain\Api\Command\TransformBoard\UseCase
+        tags: [{name: messenger.message_handler, handles: Aggrego\Domain\Api\Command\TransformBoard\Command}]
+        arguments:
+            - "@domain.board.repository"
+            - "@domain.board.from_board_factory"
+
+# Domain Board
+    domain.board.repository:
+        class: Aggrego\BasicBlockExample\Domain\Board\Repository
+
+    domain.board.new_board_factory:
+        class: Aggrego\Domain\Board\NewBoardFactory
+        arguments:
+            - {"@domain.data_board.board.builder"}
+            - "@domain.profile.board_consturction.factory"
+
+    domain.board.from_board_factory:
+        class: Aggrego\Domain\Board\FromBoardFactory
+        arguments:
+            - {"@domain.data_board.board.builder"}
+            - "@domain.profile.board_transformation.factory"
+
+# Domain Profile
+    domain.profile.board_consturction.factory:
+        classs: Aggrego\Domain\Profile\BoardConstruction\Factory
+        arguments:
+            - {"@basic_block.domain.profile.board_construction.watchman"}
+
+    domain.profile.board_transformation.factory:
+        classs: Aggrego\Domain\Profile\BoardTransformation\Factory
+        arguments:
+            - {"@basic_block.domain.profile.board_transformation.watchman"}
+
+# Data Board
+    domain.data_board.board.builder:
+        class: Aggrego\DataBoard\Board\Builder
+
+# BasicExample Profile
+    basic_block.domain.profile.board_construction.watchman:
+        class: Aggrego\BasicBlockExample\Domain\Profile\BoardConstruction\Watchman
+
+    basic_block.domain.profile.board_transformation.watchman:
+        class: Aggrego\BasicBlockExample\Domain\Profile\BoardTransformation\Watchman
+
+
