@@ -1,8 +1,8 @@
 <?php
 
-namespace spec\Aggrego\BasicBlockExample\Messanger\Handler;
+namespace spec\Aggrego\BasicBlockExample\Messenger\Handler;
 
-use Aggrego\BasicBlockExample\Messanger\Handler\CreateBoardHandler;
+use Aggrego\BasicBlockExample\Messenger\Handler\CreateBoardHandler;
 use Aggrego\Domain\Api\Command\CreateBoard\UseCase;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;

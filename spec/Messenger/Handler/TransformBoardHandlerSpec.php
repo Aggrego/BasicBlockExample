@@ -1,8 +1,8 @@
 <?php
 
-namespace spec\Aggrego\BasicBlockExample\Messanger\Handler;
+namespace spec\Aggrego\BasicBlockExample\Messenger\Handler;
 
-use Aggrego\BasicBlockExample\Messanger\Handler\TransformBoardHandler;
+use Aggrego\BasicBlockExample\Messenger\Handler\TransformBoardHandler;
 use Aggrego\Domain\Api\Command\TransformBoard\UseCase;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;

@@ -1,63 +1,92 @@
 services:
+    _defaults:
+          autowire: true
 
-# Messanger
+    Aggrego\BasicBlockExample\:
+          resource: '../src'
+
+    Symfony\Component\Console\Application:
+            # why public? so we can get it from container in bin file
+            # via "$container->get(Application::class)"
+            public: true
+
+# Symfony Command
+    basic_block.command.create_board_command:
+        public: true
+        class: Aggrego\BasicBlockExample\Command\CreateBoardCommand
+        tags:
+            - { name: 'console.command', command: 'domain:create-board' }
+#        arguments:
+#            - '@messenger.bus'
+
+    basic_block.command.transform_board_command:
+        public: true
+        class: Aggrego\BasicBlockExample\Command\TransformBoardCommand
+        tags: ['console.command']
+#        arguments:
+#            - '@messenger.bus'
+
+# Symfony Messenger
+    messenger.bus:
+        class: Symfony\Component\Messenger\MessageBus
+
     messanger.basic_block_example.handler.create_board:
-        class: Aggrego\BasicBlockExample\Messanger\Handler\CreateBoardHandler
+        class: Aggrego\BasicBlockExample\Messenger\Handler\CreateBoardHandler
+        tags: [{name: messenger.message_handler, handles: Aggrego\Domain\Api\Command\CreateBoard\Command}]
         arguments:
             - "@domain.api.create_board.use_case"
 
     messanger.basic_block_example.handler.transform_board:
-        class: Aggrego\BasicBlockExample\Messanger\Handler\TransformBoardHandler
+        class: Aggrego\BasicBlockExample\Messenger\Handler\TransformBoardHandler
+        tags: [{name: messenger.message_handler, handles: Aggrego\Domain\Api\Command\TransformBoard\Command}]
         arguments:
             - "@domain.api.transform_board.use_case"
 
 # Domain API
     domain.api.create_board.use_case:
         class: Aggrego\Domain\Api\Command\CreateBoard\UseCase
-        tags: [{name: messenger.message_handler, handles: Aggrego\Domain\Api\Command\CreateBoard\Command}]
         arguments:
-            - "@domain.board.repository"
+            - "@basic_block.board.repository"
             - "@domain.board.new_board_factory"
 
     domain.api.transform_board.use_case:
         class: Aggrego\Domain\Api\Command\TransformBoard\UseCase
-        tags: [{name: messenger.message_handler, handles: Aggrego\Domain\Api\Command\TransformBoard\Command}]
         arguments:
-            - "@domain.board.repository"
+            - "@basic_block.board.repository"
             - "@domain.board.from_board_factory"
 
 # Domain Board
-    domain.board.repository:
-        class: Aggrego\BasicBlockExample\Domain\Board\Repository
-
     domain.board.new_board_factory:
         class: Aggrego\Domain\Board\NewBoardFactory
         arguments:
-            - {"@domain.data_board.board.builder"}
-            - "@domain.profile.board_consturction.factory"
+            - ['@domain.data_board.board.builder']
+            - "@domain.profile.board_construction.factory"
 
     domain.board.from_board_factory:
         class: Aggrego\Domain\Board\FromBoardFactory
         arguments:
-            - {"@domain.data_board.board.builder"}
+            - ['@domain.data_board.board.builder']
             - "@domain.profile.board_transformation.factory"
 
 # Domain Profile
-    domain.profile.board_consturction.factory:
-        classs: Aggrego\Domain\Profile\BoardConstruction\Factory
+    domain.profile.board_construction.factory:
+        class: Aggrego\Domain\Profile\BoardConstruction\Factory
         arguments:
-            - {"@basic_block.domain.profile.board_construction.watchman"}
+            - ["@basic_block.domain.profile.board_construction.watchman"]
 
     domain.profile.board_transformation.factory:
-        classs: Aggrego\Domain\Profile\BoardTransformation\Factory
+        class: Aggrego\Domain\Profile\BoardTransformation\Factory
         arguments:
-            - {"@basic_block.domain.profile.board_transformation.watchman"}
+            - ["@basic_block.domain.profile.board_transformation.watchman"]
 
 # Data Board
     domain.data_board.board.builder:
         class: Aggrego\DataBoard\Board\Builder
 
 # BasicExample Profile
+    basic_block.board.repository:
+        class: Aggrego\BasicBlockExample\Domain\Board\Repository
+
     basic_block.domain.profile.board_construction.watchman:
         class: Aggrego\BasicBlockExample\Domain\Profile\BoardConstruction\Watchman
 

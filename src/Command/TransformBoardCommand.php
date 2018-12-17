@@ -9,23 +9,26 @@ use Symfony\Component\Messenger\MessageBusInterface;
 
 class TransformBoardCommand extends Command
 {
-    protected static $defaultName = 'domain:transform-board';
+//    protected static $defaultName = 'domain:transform-board';
 
     /** @var MessageBusInterface */
     private $bus;
 
-    public function __construct(MessageBusInterface $bus)
-    {
-        parent::__construct();
-        $this->bus = $bus;
-    }
+//    public function __construct(MessageBusInterface $bus)
+//    {
+//        parent::__construct();
+//        $this->bus = $bus;
+//    }
 
     protected function configure()
     {
-        $this->setDescription('Transform existing board with given data');
+        $this
+            ->setName('domain:transform-board')
+            ->setDescription('Transform existing board with given data.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $output->writeln('transformation');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Aggrego\BasicBlockExample\Messanger\Handler;
+namespace Aggrego\BasicBlockExample\Messenger\Handler;
 
 use Aggrego\Domain\Api\Command\TransformBoard\Command;
 use Aggrego\Domain\Api\Command\TransformBoard\UseCase;
