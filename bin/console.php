@@ -25,4 +25,7 @@ $kernel->boot();
 $container = $kernel->getContainer();
 /** @var Application $application */
 $application = $container->get(Application::class);
+foreach ($container->getParameter('console.command.ids') as $id) {
+    $application->add($container->get($id));
+}
 $application->run();

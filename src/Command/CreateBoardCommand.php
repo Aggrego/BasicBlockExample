@@ -9,16 +9,14 @@ use Symfony\Component\Messenger\MessageBusInterface;
 
 class CreateBoardCommand extends Command
 {
-//    protected static $defaultName = 'domain:create-board';
-
     /** @var MessageBusInterface */
     private $bus;
 
-//    public function __construct(MessageBusInterface $bus)
-//    {
-//        parent::__construct();
-//        $this->bus = $bus;
-//    }
+    public function __construct(MessageBusInterface $bus)
+    {
+        parent::__construct();
+        $this->bus = $bus;
+    }
 
     protected function configure()
     {

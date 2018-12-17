@@ -9,16 +9,16 @@ use Symfony\Component\Messenger\MessageBusInterface;
 
 class TransformBoardCommand extends Command
 {
-//    protected static $defaultName = 'domain:transform-board';
+    protected static $defaultName = 'domain:transform-board';
 
     /** @var MessageBusInterface */
     private $bus;
 
-//    public function __construct(MessageBusInterface $bus)
-//    {
-//        parent::__construct();
-//        $this->bus = $bus;
-//    }
+    public function __construct(MessageBusInterface $bus)
+    {
+        parent::__construct();
+        $this->bus = $bus;
+    }
 
     protected function configure()
     {

@@ -6,25 +6,22 @@ services:
           resource: '../src'
 
     Symfony\Component\Console\Application:
-            # why public? so we can get it from container in bin file
-            # via "$container->get(Application::class)"
             public: true
 
 # Symfony Command
     basic_block.command.create_board_command:
         public: true
         class: Aggrego\BasicBlockExample\Command\CreateBoardCommand
-        tags:
-            - { name: 'console.command', command: 'domain:create-board' }
-#        arguments:
-#            - '@messenger.bus'
+        tags: ['console.command']
+        arguments:
+            - '@messenger.bus'
 
     basic_block.command.transform_board_command:
         public: true
         class: Aggrego\BasicBlockExample\Command\TransformBoardCommand
         tags: ['console.command']
-#        arguments:
-#            - '@messenger.bus'
+        arguments:
+            - '@messenger.bus'
 
 # Symfony Messenger
     messenger.bus:
