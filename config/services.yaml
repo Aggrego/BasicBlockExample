@@ -2,11 +2,8 @@ services:
     _defaults:
           autowire: true
 
-    Aggrego\BasicBlockExample\:
-          resource: '../src'
-
     Symfony\Component\Console\Application:
-            public: true
+        public: true
 
 # Symfony Command
     basic_block.command.create_board_command:
@@ -26,28 +23,30 @@ services:
 # Symfony Messenger
     messenger.bus:
         class: Symfony\Component\Messenger\MessageBus
+        tags: ['messenger.bus']
 
-    messanger.basic_block_example.handler.create_board:
-        class: Aggrego\BasicBlockExample\Messenger\Handler\CreateBoardHandler
-        tags: [{name: messenger.message_handler, handles: Aggrego\Domain\Api\Command\CreateBoard\Command}]
+    messenger.bus.middleware.handle_message:
+        class: Symfony\Component\Messenger\Middleware\HandleMessageMiddleware
         arguments:
-            - "@domain.api.create_board.use_case"
+            - [] # Filled by MessengerPass
 
-    messanger.basic_block_example.handler.transform_board:
-        class: Aggrego\BasicBlockExample\Messenger\Handler\TransformBoardHandler
-        tags: [{name: messenger.message_handler, handles: Aggrego\Domain\Api\Command\TransformBoard\Command}]
+    console.command.messenger_debug:
+        public: true
+        class: Symfony\Component\Messenger\Command\DebugCommand
+        tags: ['console.command']
         arguments:
-            - "@domain.api.transform_board.use_case"
+            - [] # Filled by MessengerPass
 
-# Domain API
     domain.api.create_board.use_case:
         class: Aggrego\Domain\Api\Command\CreateBoard\UseCase
+        tags: [{name: 'messenger.message_handler', handles: Aggrego\Domain\Api\Command\CreateBoard\Command, method: 'handle'}]
         arguments:
             - "@basic_block.board.repository"
             - "@domain.board.new_board_factory"
 
     domain.api.transform_board.use_case:
         class: Aggrego\Domain\Api\Command\TransformBoard\UseCase
+        tags: [{name: 'messenger.message_handler', handles: Aggrego\Domain\Api\Command\TransformBoard\Command, method: 'handle'}]
         arguments:
             - "@basic_block.board.repository"
             - "@domain.board.from_board_factory"

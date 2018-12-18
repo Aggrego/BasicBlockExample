@@ -15,8 +15,6 @@ class TransformBoardCommand extends Command
     private const BOARD_UUID = 'board_uuid';
     private const DATA = 'data';
 
-    protected static $defaultName = 'domain:transform-board';
-
     /** @var MessageBusInterface */
     private $bus;
 

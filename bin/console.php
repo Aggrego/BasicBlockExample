@@ -14,18 +14,25 @@ declare(strict_types = 1);
 
 require __DIR__ . '/../vendor/autoload.php';
 
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Console\Application;
+use Symfony\Component\Console\DependencyInjection\AddConsoleCommandPass;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\Messenger\DependencyInjection\MessengerPass;
 
-$kernel = new \Aggrego\BasicBlockExample\Kernel(
-    $_SERVER['APP_ENV'] ?? 'dev',
-    $_SERVER['APP_DEBUG'] ?? ('prod' !== ($_SERVER['APP_ENV'] ?? 'dev'))
-);
-$kernel->boot();
+$container = new ContainerBuilder();
+$loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../config/'));
+$loader->load('services.yaml');
+$container->addCompilerPass(new MessengerPass());
+$container->addCompilerPass(new AddConsoleCommandPass());
+$container->compile();
 
-$container = $kernel->getContainer();
 /** @var Application $application */
 $application = $container->get(Application::class);
 foreach ($container->getParameter('console.command.ids') as $id) {
     $application->add($container->get($id));
 }
+$application->add($container->get('console.command.messenger_debug'));
 $application->run();
+
