@@ -1,6 +1,6 @@
 services:
     _defaults:
-          autowire: true
+        autowire: true
 
     Symfony\Component\Console\Application:
         public: true
@@ -24,6 +24,8 @@ services:
     messenger.bus:
         class: Symfony\Component\Messenger\MessageBus
         tags: ['messenger.bus']
+        arguments:
+          - ['@messenger.bus.middleware.handle_message']
 
     messenger.bus.middleware.handle_message:
         class: Symfony\Component\Messenger\Middleware\HandleMessageMiddleware
@@ -37,8 +39,15 @@ services:
         arguments:
             - [] # Filled by MessengerPass
 
+    messenger.bus.messenger.handlers_locator:
+        class: Symfony\Component\Messenger\Handler\HandlersLocator
+        tags: ['container.service_locator']
+        arguments:
+            - [] # Filled by MessengerPass
+
     domain.api.create_board.use_case:
         class: Aggrego\Domain\Api\Command\CreateBoard\UseCase
+        public: true
         tags: [{name: 'messenger.message_handler', handles: Aggrego\Domain\Api\Command\CreateBoard\Command, method: 'handle'}]
         arguments:
             - "@basic_block.board.repository"
