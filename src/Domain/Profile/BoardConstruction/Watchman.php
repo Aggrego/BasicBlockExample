@@ -17,16 +17,23 @@ use Aggrego\BasicBlockExample\Domain\Profile\Factory;
 use Aggrego\Domain\Profile\BoardConstruction\Builder as DomainBuilder;
 use Aggrego\Domain\Profile\BoardConstruction\Watchman as DomainWatchman;
 use Aggrego\Domain\Profile\Profile;
+use Assert\Assertion;
+use Assert\InvalidArgumentException;
 
 class Watchman implements DomainWatchman
 {
     public function isSupported(Profile $profile): bool
     {
+        try {
+            Assertion::regex($profile->getVersion(), '~^([0-9]+\.{0,1})+$~');
+        } catch (InvalidArgumentException $e) {
+            return false;
+        }
         return $profile->getName() === Factory::PROFILE_NAME;
     }
 
     public function passBuilder(Profile $profile): DomainBuilder
     {
-        return new Builder($profile);
+        return new Builder(Factory::factory($profile->getVersion()));
     }
 }

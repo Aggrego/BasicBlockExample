@@ -15,6 +15,7 @@
     "aggrego/domain": "dev-master",
     "aggrego/data-board": "dev-master",
     "aggrego/event-consumer": "dev-master",
+    "aggrego/domain-event-producer": "dev-master",
     "symfony/flex": "1.1.*",
     "symfony/messenger": "^4.2",
     "symfony/console": "^4.2",

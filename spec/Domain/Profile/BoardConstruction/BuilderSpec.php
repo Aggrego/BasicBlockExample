@@ -9,16 +9,17 @@
  *
  */
 
+declare(strict_types = 1);
+
 namespace spec\Aggrego\BasicBlockExample\Domain\Profile\BoardConstruction;
 
+use Aggrego\BasicBlockExample\Domain\Profile\BoardConstruction\Builder;
 use Aggrego\BasicBlockExample\Domain\Profile\Factory;
 use Aggrego\DataBoard\Board\Prototype\Board;
 use Aggrego\Domain\Board\Key;
 use Aggrego\Domain\Profile\BoardConstruction\Builder as DomainBuilder;
-use Aggrego\BasicBlockExample\Domain\Profile\BoardConstruction\Builder;
 use Aggrego\Domain\Profile\BoardConstruction\Exception\UnableToBuildBoardException;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class BuilderSpec extends ObjectBehavior
 {

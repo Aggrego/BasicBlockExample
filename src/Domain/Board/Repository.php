@@ -1,12 +1,23 @@
 <?php
+/**
+ *
+ * This file is part of the Aggrego.
+ * (c) Tomasz Kunicki <kunicki.tomasz@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ */
+
+declare(strict_types = 1);
 
 namespace Aggrego\BasicBlockExample\Domain\Board;
 
-use Aggrego\AggregateEventConsumer\Uuid;
 use Aggrego\Domain\Board\Board;
 use Aggrego\Domain\Board\Exception\BoardExistException;
 use Aggrego\Domain\Board\Exception\BoardNotFoundException;
 use Aggrego\Domain\Board\Repository as DomainRepository;
+use Aggrego\Domain\Board\Uuid;
 
 class Repository implements DomainRepository
 {
@@ -16,7 +27,9 @@ class Repository implements DomainRepository
     public function __construct()
     {
         $dir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'AggregoBoardRepository' . DIRECTORY_SEPARATOR;
-        mkdir($dir, 0777, true);
+        if (!file_exists($dir)) {
+            mkdir($dir, 0777, true);
+        }
         $this->dir = $dir;
     }
 
@@ -29,8 +42,8 @@ class Repository implements DomainRepository
     {
         $boardUuidValue = $uuid->getValue();
         $filePath = $this->dir . $boardUuidValue . '.data';
-        if (file_exists($filePath)) {
-            throw new BoardExistException(sprintf('Given "%s" exists' . $boardUuidValue));
+        if (!file_exists($filePath)) {
+            throw new BoardExistException(sprintf('Given "%s" don\'t texists', $boardUuidValue));
         }
 
         $content = file_get_contents($filePath);
@@ -46,7 +59,7 @@ class Repository implements DomainRepository
         $boardUuidValue = $board->getUuid()->getValue();
         $filePath = $this->dir . $boardUuidValue . '.data';
         if (file_exists($filePath)) {
-            throw new BoardExistException(sprintf('Given "%s" exists' . $boardUuidValue));
+            throw new BoardExistException(sprintf('Given "%s" exists', $boardUuidValue));
         }
         file_put_contents($filePath, serialize($board));
     }

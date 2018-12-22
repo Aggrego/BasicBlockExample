@@ -9,6 +9,8 @@
  *
  */
 
+declare(strict_types = 1);
+
 namespace spec\Aggrego\BasicBlockExample\Domain\Profile\BoardConstruction;
 
 use Aggrego\BasicBlockExample\Domain\Profile\BoardConstruction\Watchman;

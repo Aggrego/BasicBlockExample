@@ -9,9 +9,10 @@
  *
  */
 
+declare(strict_types = 1);
+
 namespace spec\Aggrego\BasicBlockExample\Domain\Profile\BoardTransformation;
 
-use Aggrego\AggregateEventConsumer\Uuid;
 use Aggrego\BasicBlockExample\Domain\Profile\BoardTransformation\Transformation;
 use Aggrego\BasicBlockExample\Domain\Profile\Factory;
 use Aggrego\DataBoard\Board\Board;
@@ -19,8 +20,9 @@ use Aggrego\DataBoard\Board\Data;
 use Aggrego\DataBoard\Board\Metadata;
 use Aggrego\DataBoard\Board\Prototype\Board as BoardPrototype;
 use Aggrego\Domain\Board\Key;
-use Aggrego\Domain\Profile\BoardTransformation\Transformation as DomainTransformation;
+use Aggrego\Domain\Board\Uuid;
 use Aggrego\Domain\Profile\BoardTransformation\Exception\UnprocessableBoardException;
+use Aggrego\Domain\Profile\BoardTransformation\Transformation as DomainTransformation;
 use PhpSpec\ObjectBehavior;
 
 class TransformationSpec extends ObjectBehavior

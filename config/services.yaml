@@ -45,22 +45,42 @@ services:
         arguments:
             - [] # Filled by MessengerPass
 
-    domain.api.create_board.use_case:
-        class: Aggrego\Domain\Api\Command\CreateBoard\UseCase
+    domain_event_producer.handler.create_board:
+        class: Aggrego\DomainEventProducer\Messenger\Handlers\CreateBoardHandler
         public: true
         tags: [{name: 'messenger.message_handler', handles: Aggrego\Domain\Api\Command\CreateBoard\Command, method: 'handle'}]
         arguments:
-            - "@basic_block.board.repository"
+            - '@domain.api.create_board.use_case'
+            - '@domain_event_producer.domain.repository'
+            - '@aggrego.neo4j.event_consumer.client'
+
+    domain_event_producer.handler.transform_board:
+        class: Aggrego\DomainEventProducer\Messenger\Handlers\TransformBoardHandler
+        public: true
+        tags: [{name: 'messenger.message_handler', handles: Aggrego\Domain\Api\Command\TransformBoard\Command, method: 'handle'}]
+        arguments:
+            - '@domain.api.transform_board.use_case'
+            - '@domain_event_producer.domain.repository'
+            - '@aggrego.neo4j.event_consumer.client'
+
+    domain_event_producer.domain.repository:
+        class: Aggrego\DomainEventProducer\Domain\Repository
+        arguments:
+            - '@basic_block.board.repository'
+
+# Domain Board
+    domain.api.create_board.use_case:
+        class: Aggrego\Domain\Api\Command\CreateBoard\UseCase
+        arguments:
+            - "@domain_event_producer.domain.repository"
             - "@domain.board.new_board_factory"
 
     domain.api.transform_board.use_case:
         class: Aggrego\Domain\Api\Command\TransformBoard\UseCase
-        tags: [{name: 'messenger.message_handler', handles: Aggrego\Domain\Api\Command\TransformBoard\Command, method: 'handle'}]
         arguments:
-            - "@basic_block.board.repository"
+            - "@domain_event_producer.domain.repository"
             - "@domain.board.from_board_factory"
 
-# Domain Board
     domain.board.new_board_factory:
         class: Aggrego\Domain\Board\NewBoardFactory
         arguments:
@@ -98,4 +118,7 @@ services:
     basic_block.domain.profile.board_transformation.watchman:
         class: Aggrego\BasicBlockExample\Domain\Profile\BoardTransformation\Watchman
 
+# Neo4j
+    aggrego.neo4j.event_consumer.client:
+        class: Aggrego\BasicBlockExample\EventConsumer\Neo4j\Client
 

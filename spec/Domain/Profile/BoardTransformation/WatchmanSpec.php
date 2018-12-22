@@ -9,14 +9,15 @@
  *
  */
 
+declare(strict_types = 1);
+
 namespace spec\Aggrego\BasicBlockExample\Domain\Profile\BoardTransformation;
 
+use Aggrego\BasicBlockExample\Domain\Profile\BoardTransformation\Watchman;
 use Aggrego\BasicBlockExample\Domain\Profile\Factory;
 use Aggrego\Domain\Profile\BoardTransformation\Watchman as DomainWatchman;
-use Aggrego\BasicBlockExample\Domain\Profile\BoardTransformation\Watchman;
 use Aggrego\Domain\Profile\Profile;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class WatchmanSpec extends ObjectBehavior
 {

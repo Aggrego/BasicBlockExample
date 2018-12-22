@@ -4,62 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "26c62900ee66df5bb87c17c9a37790ca",
+    "content-hash": "a3c9ca4b9b89a20d0c405e78ab57e89b",
     "packages": [
-        {
-            "name": "aggrego/aggregate-event-consumer",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Aggrego/AggregateEventConsumer.git",
-                "reference": "7a65b2760cc2fcf02433a03dc4a0de6198e8fa43"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Aggrego/AggregateEventConsumer/zipball/7a65b2760cc2fcf02433a03dc4a0de6198e8fa43",
-                "reference": "7a65b2760cc2fcf02433a03dc4a0de6198e8fa43",
-                "shasum": ""
-            },
-            "require": {
-                "aggrego/event-consumer": "dev-master",
-                "beberlei/assert": "^3.0",
-                "composer/semver": "1.4.*",
-                "php": ">=7.1",
-                "timitao/value-object": "dev-master"
-            },
-            "require-dev": {
-                "phpspec/phpspec": "^5.0",
-                "wikimedia/composer-merge-plugin": "1.4.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Aggrego\\AggregateEventConsumer\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Tomasz Kunicki"
-                }
-            ],
-            "time": "2018-12-05T21:17:17+00:00"
-        },
         {
             "name": "aggrego/data-board",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Aggrego/DataBoard.git",
-                "reference": "712a6964196df55716bd0aa0bcbe4a80452cd7b6"
+                "reference": "bbcaf65e479613d8e08d05ec7905b467845e6b31"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Aggrego/DataBoard/zipball/712a6964196df55716bd0aa0bcbe4a80452cd7b6",
-                "reference": "712a6964196df55716bd0aa0bcbe4a80452cd7b6",
+                "url": "https://api.github.com/repos/Aggrego/DataBoard/zipball/bbcaf65e479613d8e08d05ec7905b467845e6b31",
+                "reference": "bbcaf65e479613d8e08d05ec7905b467845e6b31",
                 "shasum": ""
             },
             "require": {
@@ -88,7 +46,7 @@
                     "name": "Tomasz Kunicki"
                 }
             ],
-            "time": "2018-11-15T21:24:53+00:00"
+            "time": "2018-12-22T15:59:05+00:00"
         },
         {
             "name": "aggrego/domain",
@@ -96,16 +54,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Aggrego/Domain.git",
-                "reference": "5364513a16c67d9253a329329d51aecba5dbbd7f"
+                "reference": "9c641751dbfccac1c56635aba3130d4e9ded6eb4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Aggrego/Domain/zipball/5364513a16c67d9253a329329d51aecba5dbbd7f",
-                "reference": "5364513a16c67d9253a329329d51aecba5dbbd7f",
+                "url": "https://api.github.com/repos/Aggrego/Domain/zipball/9c641751dbfccac1c56635aba3130d4e9ded6eb4",
+                "reference": "9c641751dbfccac1c56635aba3130d4e9ded6eb4",
                 "shasum": ""
             },
             "require": {
-                "aggrego/aggregate-event-consumer": "dev-master",
+                "aggrego/event-consumer": "dev-master",
                 "beberlei/assert": "^3.0",
                 "php": ">=7.1",
                 "ramsey/uuid": "^3.8",
@@ -132,7 +90,47 @@
                     "name": "Tomasz Kunicki"
                 }
             ],
-            "time": "2018-12-05T21:39:52+00:00"
+            "time": "2018-12-20T15:54:03+00:00"
+        },
+        {
+            "name": "aggrego/domain-event-producer",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Aggrego/DomainEventProducer.git",
+                "reference": "c4092456d7d8883c15d07b09ec2d50f15562c14a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Aggrego/DomainEventProducer/zipball/c4092456d7d8883c15d07b09ec2d50f15562c14a",
+                "reference": "c4092456d7d8883c15d07b09ec2d50f15562c14a",
+                "shasum": ""
+            },
+            "require": {
+                "aggrego/domain": "dev-master",
+                "aggrego/event-consumer": "dev-master",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "phpspec/phpspec": "^5.0",
+                "wikimedia/composer-merge-plugin": "1.4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Aggrego\\DomainEventProducer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Tomasz Kunicki"
+                }
+            ],
+            "time": "2018-12-22T16:05:36+00:00"
         },
         {
             "name": "aggrego/event-consumer",
@@ -140,12 +138,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Aggrego/EventConsumer.git",
-                "reference": "933f0d496ea49437cb0524e837f2381b23deb60c"
+                "reference": "6657470b7505f6770436aef875a750c3ba6c6e0f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Aggrego/EventConsumer/zipball/933f0d496ea49437cb0524e837f2381b23deb60c",
-                "reference": "933f0d496ea49437cb0524e837f2381b23deb60c",
+                "url": "https://api.github.com/repos/Aggrego/EventConsumer/zipball/6657470b7505f6770436aef875a750c3ba6c6e0f",
+                "reference": "6657470b7505f6770436aef875a750c3ba6c6e0f",
                 "shasum": ""
             },
             "require": {
@@ -173,7 +171,7 @@
                     "name": "Tomasz Kunicki"
                 }
             ],
-            "time": "2018-12-05T20:57:33+00:00"
+            "time": "2018-12-20T15:28:12+00:00"
         },
         {
             "name": "beberlei/assert",
@@ -338,6 +336,55 @@
             "time": "2018-07-02T15:55:56+00:00"
         },
         {
+            "name": "psr/container",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/container.git",
+                "reference": "2cc4a01788191489dc7459446ba832fa79a216a7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/container/zipball/2cc4a01788191489dc7459446ba832fa79a216a7",
+                "reference": "2cc4a01788191489dc7459446ba832fa79a216a7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Container\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common Container Interface (PHP FIG PSR-11)",
+            "homepage": "https://github.com/php-fig/container",
+            "keywords": [
+                "PSR-11",
+                "container",
+                "container-interface",
+                "container-interop",
+                "psr"
+            ],
+            "time": "2017-06-28T15:35:32+00:00"
+        },
+        {
             "name": "ramsey/uuid",
             "version": "3.x-dev",
             "source": {
@@ -426,12 +473,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "7dac0f8df415100d5d4ecd71213d794546d65d0e"
+                "reference": "3f8a62ad1763ab3a43b1e30d90a6f443bab15fa5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/7dac0f8df415100d5d4ecd71213d794546d65d0e",
-                "reference": "7dac0f8df415100d5d4ecd71213d794546d65d0e",
+                "url": "https://api.github.com/repos/symfony/console/zipball/3f8a62ad1763ab3a43b1e30d90a6f443bab15fa5",
+                "reference": "3f8a62ad1763ab3a43b1e30d90a6f443bab15fa5",
                 "shasum": ""
             },
             "require": {
@@ -487,7 +534,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2018-12-13T12:43:21+00:00"
+            "time": "2018-12-17T13:51:43+00:00"
         },
         {
             "name": "symfony/contracts",
@@ -558,17 +605,90 @@
             "time": "2018-12-05T08:06:11+00:00"
         },
         {
+            "name": "symfony/dependency-injection",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/dependency-injection.git",
+                "reference": "9426384715c392e3659cec27fce9fb21fbf71f90"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/9426384715c392e3659cec27fce9fb21fbf71f90",
+                "reference": "9426384715c392e3659cec27fce9fb21fbf71f90",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1.3",
+                "psr/container": "^1.0",
+                "symfony/contracts": "^1.0"
+            },
+            "conflict": {
+                "symfony/config": "<4.3",
+                "symfony/finder": "<3.4",
+                "symfony/proxy-manager-bridge": "<3.4",
+                "symfony/yaml": "<3.4"
+            },
+            "provide": {
+                "psr/container-implementation": "1.0",
+                "symfony/service-contracts-implementation": "1.0"
+            },
+            "require-dev": {
+                "symfony/config": "^4.3",
+                "symfony/expression-language": "~3.4|~4.0",
+                "symfony/yaml": "~3.4|~4.0"
+            },
+            "suggest": {
+                "symfony/config": "",
+                "symfony/expression-language": "For using expressions in service container configuration",
+                "symfony/finder": "For using double-star glob patterns or when GLOB_BRACE portability is required",
+                "symfony/proxy-manager-bridge": "Generate service proxies to lazy load them",
+                "symfony/yaml": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\DependencyInjection\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony DependencyInjection Component",
+            "homepage": "https://symfony.com",
+            "time": "2018-12-17T14:43:57+00:00"
+        },
+        {
             "name": "symfony/flex",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/flex.git",
-                "reference": "4a7cd6d28041ebcdaecbe9f832cc3bc2f4ff4831"
+                "reference": "faca89864228928bf512d9f5d5fbfa5151456ef4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/flex/zipball/4a7cd6d28041ebcdaecbe9f832cc3bc2f4ff4831",
-                "reference": "4a7cd6d28041ebcdaecbe9f832cc3bc2f4ff4831",
+                "url": "https://api.github.com/repos/symfony/flex/zipball/faca89864228928bf512d9f5d5fbfa5151456ef4",
+                "reference": "faca89864228928bf512d9f5d5fbfa5151456ef4",
                 "shasum": ""
             },
             "require": {
@@ -603,20 +723,20 @@
                 }
             ],
             "description": "Composer plugin for Symfony",
-            "time": "2018-12-11T14:13:56+00:00"
+            "time": "2018-12-20T10:53:10+00:00"
         },
         {
             "name": "symfony/messenger",
-            "version": "4.2.x-dev",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/messenger.git",
-                "reference": "65b454dccd238ae4f24765f05a2c076c74f1efdc"
+                "reference": "35c70b97ea2de4f96cfdc95cd18ef6efa6aa6bc4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/messenger/zipball/65b454dccd238ae4f24765f05a2c076c74f1efdc",
-                "reference": "65b454dccd238ae4f24765f05a2c076c74f1efdc",
+                "url": "https://api.github.com/repos/symfony/messenger/zipball/35c70b97ea2de4f96cfdc95cd18ef6efa6aa6bc4",
+                "reference": "35c70b97ea2de4f96cfdc95cd18ef6efa6aa6bc4",
                 "shasum": ""
             },
             "require": {
@@ -640,7 +760,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.2-dev"
+                    "dev-master": "4.3-dev"
                 }
             },
             "autoload": {
@@ -667,7 +787,7 @@
             ],
             "description": "Symfony Messenger Component",
             "homepage": "https://symfony.com",
-            "time": "2018-12-11T13:32:32+00:00"
+            "time": "2018-12-13T12:43:21+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -1366,12 +1486,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "3660b2eed90abdf92ac2e9dae9a238d2701bfa77"
+                "reference": "7e272180527c34a97680de85eb5aba0847a664e0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/3660b2eed90abdf92ac2e9dae9a238d2701bfa77",
-                "reference": "3660b2eed90abdf92ac2e9dae9a238d2701bfa77",
+                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/7e272180527c34a97680de85eb5aba0847a664e0",
+                "reference": "7e272180527c34a97680de85eb5aba0847a664e0",
                 "shasum": ""
             },
             "require": {
@@ -1392,8 +1512,8 @@
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Prophecy\\": "src/"
+                "psr-4": {
+                    "Prophecy\\": "src/Prophecy"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1421,56 +1541,7 @@
                 "spy",
                 "stub"
             ],
-            "time": "2018-11-04T18:50:11+00:00"
-        },
-        {
-            "name": "psr/container",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-fig/container.git",
-                "reference": "2cc4a01788191489dc7459446ba832fa79a216a7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/container/zipball/2cc4a01788191489dc7459446ba832fa79a216a7",
-                "reference": "2cc4a01788191489dc7459446ba832fa79a216a7",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Psr\\Container\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
-                }
-            ],
-            "description": "Common Container Interface (PHP FIG PSR-11)",
-            "homepage": "https://github.com/php-fig/container",
-            "keywords": [
-                "PSR-11",
-                "container",
-                "container-interface",
-                "container-interop",
-                "psr"
-            ],
-            "time": "2017-06-28T15:35:32+00:00"
+            "time": "2018-12-18T15:40:51+00:00"
         },
         {
             "name": "sebastian/comparator",
@@ -1776,90 +1847,17 @@
             "time": "2018-12-13T12:43:21+00:00"
         },
         {
-            "name": "symfony/dependency-injection",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/dependency-injection.git",
-                "reference": "23084c294ac5d93b5ca1e67841ce9ae128e3b532"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/23084c294ac5d93b5ca1e67841ce9ae128e3b532",
-                "reference": "23084c294ac5d93b5ca1e67841ce9ae128e3b532",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.1.3",
-                "psr/container": "^1.0",
-                "symfony/contracts": "^1.0"
-            },
-            "conflict": {
-                "symfony/config": "<4.3",
-                "symfony/finder": "<3.4",
-                "symfony/proxy-manager-bridge": "<3.4",
-                "symfony/yaml": "<3.4"
-            },
-            "provide": {
-                "psr/container-implementation": "1.0",
-                "symfony/service-contracts-implementation": "1.0"
-            },
-            "require-dev": {
-                "symfony/config": "^4.3",
-                "symfony/expression-language": "~3.4|~4.0",
-                "symfony/yaml": "~3.4|~4.0"
-            },
-            "suggest": {
-                "symfony/config": "",
-                "symfony/expression-language": "For using expressions in service container configuration",
-                "symfony/finder": "For using double-star glob patterns or when GLOB_BRACE portability is required",
-                "symfony/proxy-manager-bridge": "Generate service proxies to lazy load them",
-                "symfony/yaml": ""
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "4.3-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\DependencyInjection\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony DependencyInjection Component",
-            "homepage": "https://symfony.com",
-            "time": "2018-12-13T12:43:21+00:00"
-        },
-        {
             "name": "symfony/event-dispatcher",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "a6ec602b1c247fd67f9104642f397bc70667df84"
+                "reference": "a0c96c8771a003c058ef2e4366055688be8bd1df"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/a6ec602b1c247fd67f9104642f397bc70667df84",
-                "reference": "a6ec602b1c247fd67f9104642f397bc70667df84",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/a0c96c8771a003c058ef2e4366055688be8bd1df",
+                "reference": "a0c96c8771a003c058ef2e4366055688be8bd1df",
                 "shasum": ""
             },
             "require": {
@@ -1910,7 +1908,7 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2018-12-13T12:43:21+00:00"
+            "time": "2018-12-17T13:49:19+00:00"
         },
         {
             "name": "symfony/filesystem",
@@ -2341,7 +2339,8 @@
     "stability-flags": {
         "aggrego/domain": 20,
         "aggrego/data-board": 20,
-        "aggrego/event-consumer": 20
+        "aggrego/event-consumer": 20,
+        "aggrego/domain-event-producer": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
