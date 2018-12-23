@@ -19,7 +19,8 @@
     "symfony/flex": "1.1.*",
     "symfony/messenger": "^4.2",
     "symfony/console": "^4.2",
-    "symfony/dependency-injection": "^4.2"
+    "symfony/dependency-injection": "^4.2",
+    "graphaware/neo4j-php-client": "^4.0"
   },
   "require-dev": {
     "wikimedia/composer-merge-plugin": "1.4.*",
@@ -28,6 +29,8 @@
     "timitao/behat-symfony-container": "^1.1"
   },
   "autoload": {
-    "psr-4": {"Aggrego\\BasicBlockExample\\": "src/"}
+    "psr-4": {
+      "Aggrego\\BasicBlockExample\\": "src/"
+    }
   }
 }

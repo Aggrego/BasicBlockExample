@@ -1,4 +1,31 @@
 {
+    "graphaware/neo4j-bolt": {
+        "version": "1.4.0"
+    },
+    "graphaware/neo4j-common": {
+        "version": "2.2.1"
+    },
+    "graphaware/neo4j-php-client": {
+        "version": "4.2.1"
+    },
+    "guzzlehttp/guzzle": {
+        "version": "6.3-dev"
+    },
+    "guzzlehttp/promises": {
+        "version": "1.4-dev"
+    },
+    "guzzlehttp/psr7": {
+        "version": "1.5-dev"
+    },
+    "myclabs/php-enum": {
+        "version": "1.6.4"
+    },
+    "psr/http-message": {
+        "version": "1.0.x-dev"
+    },
+    "ralouphie/getallheaders": {
+        "version": "3.0.2"
+    },
     "symfony/flex": {
         "version": "1.0",
         "recipe": {
