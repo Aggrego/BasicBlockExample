@@ -16,9 +16,20 @@ namespace Aggrego\BasicBlockExample\EventConsumer\Neo4j;
 use Aggrego\EventConsumer\Client as EventConsumerClient;
 use Aggrego\EventConsumer\Event;
 use Aggrego\EventConsumer\Exception\UnprocessableEventException;
+use GraphAware\Neo4j\Client\Client as Neo4jClient;
 
 class Client implements EventConsumerClient
 {
+    /**
+     * @var Neo4jClient
+     */
+    private $client;
+
+    public function __construct(Neo4jClient $client)
+    {
+        $this->client = $client;
+    }
+
     /**
      * @param Event $event
      * @throws UnprocessableEventException if event (payload) have invalid structure.
