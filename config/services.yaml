@@ -121,4 +121,8 @@ services:
 # Neo4j
     aggrego.neo4j.event_consumer.client:
         class: Aggrego\BasicBlockExample\EventConsumer\Neo4j\Client
+        factory: ['@aggrego.neo4j.event_consumer.factory', factory]
+
+    aggrego.neo4j.event_consumer.factory:
+        class: Aggrego\BasicBlockExample\EventConsumer\Neo4j\Factory
 
