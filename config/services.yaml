@@ -48,20 +48,20 @@ services:
     domain_event_producer.handler.create_board:
         class: Aggrego\DomainEventProducer\Messenger\Handlers\CreateBoardHandler
         public: true
-        tags: [{name: 'messenger.message_handler', handles: Aggrego\Domain\Api\Command\CreateBoard\Command, method: 'handle'}]
+        tags: [{name: 'messenger.message_handler', handles: Aggrego\Domain\Api\Command\CreateBoard\Command, method: 'handle', bus: 'messenger.bus'}]
         arguments:
             - '@domain.api.create_board.use_case'
             - '@domain_event_producer.domain.repository'
-            - '@aggrego.neo4j.event_consumer.client'
+            - '@aggrego.neo4j_event_consumer.client'
 
     domain_event_producer.handler.transform_board:
         class: Aggrego\DomainEventProducer\Messenger\Handlers\TransformBoardHandler
         public: true
-        tags: [{name: 'messenger.message_handler', handles: Aggrego\Domain\Api\Command\TransformBoard\Command, method: 'handle'}]
+        tags: [{name: 'messenger.message_handler', handles: Aggrego\Domain\Api\Command\TransformBoard\Command, method: 'handle', bus: 'messenger.bus'}]
         arguments:
             - '@domain.api.transform_board.use_case'
             - '@domain_event_producer.domain.repository'
-            - '@aggrego.neo4j.event_consumer.client'
+            - '@aggrego.neo4j_event_consumer.client'
 
     domain_event_producer.domain.repository:
         class: Aggrego\DomainEventProducer\Domain\Repository
@@ -118,11 +118,42 @@ services:
     basic_block.domain.profile.board_transformation.watchman:
         class: Aggrego\BasicBlockExample\Domain\Profile\BoardTransformation\Watchman
 
-# Neo4j
-    aggrego.neo4j.event_consumer.client:
-        class: Aggrego\BasicBlockExample\EventConsumer\Neo4j\Client
-        factory: ['@aggrego.neo4j.event_consumer.factory', factory]
+# BasicExample Neo4j
+    basic_block.neo4j_event_consumer.middleware.data_board_created:
+        class: Aggrego\BasicBlockExample\Neo4jEvenConsumer\Middleware\DataBoardCreatedEventHandler
+        tags: [{name: 'messenger.message_handler', handles: Aggrego\DataBoard\Board\Events\BoardCreatedEvent, method: 'handle', bus: 'aggrego.neo4j_event_consumer.messenger.bus'}]
+        arguments:
+          - '@aggrego.neo4j_event_consumer.db_client.client'
 
-    aggrego.neo4j.event_consumer.factory:
-        class: Aggrego\BasicBlockExample\EventConsumer\Neo4j\Factory
+# Neo4j
+    aggrego.neo4j_event_consumer.client:
+        class: Aggrego\Neo4jEventConsumer\Client
+        arguments:
+            - '@aggrego.neo4j_event_consumer.messenger.bus'
+
+    aggrego.neo4j_event_consumer.db_client.factory:
+        class: Aggrego\Neo4jEventConsumer\DbClient\Factory
+
+    aggrego.neo4j_event_consumer.db_client.client:
+        class: GraphAware\Neo4j\DbClient\Client
+        factory: [ '@aggrego.neo4j_event_consumer.db_client.factory', factory]
+        arguments:
+            - default: 'http://neo4j:aaaaaa@neo4j:7474'
+
+    aggrego.neo4j_event_consumer.messenger.bus:
+        class: Symfony\Component\Messenger\MessageBus
+        tags: ['messenger.bus']
+        arguments:
+          - ['@aggrego.neo4j_event_consumer.messenger.bus.middleware.handle_message']
+
+    aggrego.neo4j_event_consumer.messenger.bus.middleware.handle_message:
+        class: Symfony\Component\Messenger\Middleware\HandleMessageMiddleware
+        arguments:
+            - [] # Filled by MessengerPass
+
+    aggrego.neo4j_event_consumer.messenger.bus.messenger.handlers_locator:
+        class: Symfony\Component\Messenger\Handler\HandlersLocator
+        tags: ['container.service_locator']
+        arguments:
+            - [] # Filled by MessengerPass
 

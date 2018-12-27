@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "126b09bd002d0ce30bc484ab10aea9f7",
+    "content-hash": "461daf8918eb746248687bc9c4d49c05",
     "packages": [
         {
             "name": "aggrego/data-board",
@@ -172,6 +172,47 @@
                 }
             ],
             "time": "2018-12-20T15:28:12+00:00"
+        },
+        {
+            "name": "aggrego/neo4j-event-consumer",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Aggrego/Neo4jEventConsumer.git",
+                "reference": "dd0bbe9e183298aac575d1f98ae2cd9a353b51d9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Aggrego/Neo4jEventConsumer/zipball/dd0bbe9e183298aac575d1f98ae2cd9a353b51d9",
+                "reference": "dd0bbe9e183298aac575d1f98ae2cd9a353b51d9",
+                "shasum": ""
+            },
+            "require": {
+                "aggrego/event-consumer": "dev-master",
+                "graphaware/neo4j-php-client": "^4.0",
+                "php": ">=7.1",
+                "symfony/messenger": "^4.2"
+            },
+            "require-dev": {
+                "phpspec/phpspec": "^5.0",
+                "wikimedia/composer-merge-plugin": "1.4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Aggrego\\Neo4jEventConsumer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Tomasz Kunicki"
+                }
+            ],
+            "time": "2018-12-27T17:14:10+00:00"
         },
         {
             "name": "beberlei/assert",
@@ -2806,7 +2847,8 @@
         "aggrego/domain": 20,
         "aggrego/data-board": 20,
         "aggrego/event-consumer": 20,
-        "aggrego/domain-event-producer": 20
+        "aggrego/domain-event-producer": 20,
+        "aggrego/neo4j-event-consumer": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

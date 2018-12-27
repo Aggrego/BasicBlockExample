@@ -43,7 +43,7 @@ class Repository implements DomainRepository
         $boardUuidValue = $uuid->getValue();
         $filePath = $this->dir . $boardUuidValue . '.data';
         if (!file_exists($filePath)) {
-            throw new BoardExistException(sprintf('Given "%s" don\'t texists', $boardUuidValue));
+            throw new BoardExistException(sprintf('Given "%s" don\'t exists in "%s"', $boardUuidValue, $filePath));
         }
 
         $content = file_get_contents($filePath);

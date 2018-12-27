@@ -16,11 +16,11 @@
     "aggrego/data-board": "dev-master",
     "aggrego/event-consumer": "dev-master",
     "aggrego/domain-event-producer": "dev-master",
+    "aggrego/neo4j-event-consumer": "dev-master",
     "symfony/flex": "1.1.*",
     "symfony/messenger": "^4.2",
     "symfony/console": "^4.2",
-    "symfony/dependency-injection": "^4.2",
-    "graphaware/neo4j-php-client": "^4.0"
+    "symfony/dependency-injection": "^4.2"
   },
   "require-dev": {
     "wikimedia/composer-merge-plugin": "1.4.*",

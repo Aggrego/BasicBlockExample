@@ -14,17 +14,19 @@ declare(strict_types = 1);
 namespace Aggrego\BasicBlockExample\Command;
 
 use Aggrego\Domain\Api\Command\TransformBoard\Command as TransformBoardDomainCommand;
+use Assert\Assertion;
 use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 class TransformBoardCommand extends Command
 {
     private const BOARD_UUID = 'board_uuid';
-    private const DATA = 'data';
+    private const DATA_FILE_SOURCE = 'data_file_source';
 
     /** @var MessageBusInterface */
     private $bus;
@@ -41,14 +43,22 @@ class TransformBoardCommand extends Command
             ->setName('domain:transform-board')
             ->setDescription('Transform existing board with given data.')
             ->addArgument(self::BOARD_UUID, InputArgument::REQUIRED, 'Board uuid')
-            ->addArgument(self::DATA, InputArgument::REQUIRED, 'Profile data in JSON format');
+            ->addOption(self::DATA_FILE_SOURCE, 'f', InputOption::VALUE_REQUIRED, 'Profile data in JSON format in file');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $data = json_decode($input->getArgument(self::DATA), true);
+        $data = null;
+        $file = $input->getOption(self::DATA_FILE_SOURCE);
+        if ($file) {
+            Assertion::file($file);
+            $fileContent = file_get_contents($file);
+            Assertion::isJsonString($fileContent);
+            $data = json_decode($fileContent, true);
+        }
+
         if ($data === null) {
-            throw new Exception('Invalid JSON');
+            throw new Exception('No data was loaded correctly.');
         }
         $this->bus->dispatch(
             new TransformBoardDomainCommand(
