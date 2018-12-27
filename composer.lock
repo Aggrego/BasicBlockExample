@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Aggrego/DataBoard.git",
-                "reference": "bbcaf65e479613d8e08d05ec7905b467845e6b31"
+                "reference": "01f40d0b52ee74cb3ef48e7891cc0bf12eefbfbc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Aggrego/DataBoard/zipball/bbcaf65e479613d8e08d05ec7905b467845e6b31",
-                "reference": "bbcaf65e479613d8e08d05ec7905b467845e6b31",
+                "url": "https://api.github.com/repos/Aggrego/DataBoard/zipball/01f40d0b52ee74cb3ef48e7891cc0bf12eefbfbc",
+                "reference": "01f40d0b52ee74cb3ef48e7891cc0bf12eefbfbc",
                 "shasum": ""
             },
             "require": {
@@ -46,7 +46,7 @@
                     "name": "Tomasz Kunicki"
                 }
             ],
-            "time": "2018-12-22T15:59:05+00:00"
+            "time": "2018-12-27T23:22:58+00:00"
         },
         {
             "name": "aggrego/domain",
@@ -54,12 +54,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Aggrego/Domain.git",
-                "reference": "9c641751dbfccac1c56635aba3130d4e9ded6eb4"
+                "reference": "08ba4e4ffff8a0e231882d98a7a444c8dc914104"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Aggrego/Domain/zipball/9c641751dbfccac1c56635aba3130d4e9ded6eb4",
-                "reference": "9c641751dbfccac1c56635aba3130d4e9ded6eb4",
+                "url": "https://api.github.com/repos/Aggrego/Domain/zipball/08ba4e4ffff8a0e231882d98a7a444c8dc914104",
+                "reference": "08ba4e4ffff8a0e231882d98a7a444c8dc914104",
                 "shasum": ""
             },
             "require": {
@@ -90,7 +90,7 @@
                     "name": "Tomasz Kunicki"
                 }
             ],
-            "time": "2018-12-20T15:54:03+00:00"
+            "time": "2018-12-27T23:22:58+00:00"
         },
         {
             "name": "aggrego/domain-event-producer",
@@ -98,12 +98,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Aggrego/DomainEventProducer.git",
-                "reference": "c4092456d7d8883c15d07b09ec2d50f15562c14a"
+                "reference": "bf2c78a2fb5492914652b320ca33354871e0fdca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Aggrego/DomainEventProducer/zipball/c4092456d7d8883c15d07b09ec2d50f15562c14a",
-                "reference": "c4092456d7d8883c15d07b09ec2d50f15562c14a",
+                "url": "https://api.github.com/repos/Aggrego/DomainEventProducer/zipball/bf2c78a2fb5492914652b320ca33354871e0fdca",
+                "reference": "bf2c78a2fb5492914652b320ca33354871e0fdca",
                 "shasum": ""
             },
             "require": {
@@ -130,7 +130,7 @@
                     "name": "Tomasz Kunicki"
                 }
             ],
-            "time": "2018-12-22T16:05:36+00:00"
+            "time": "2018-12-27T23:22:57+00:00"
         },
         {
             "name": "aggrego/event-consumer",
@@ -138,12 +138,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Aggrego/EventConsumer.git",
-                "reference": "6657470b7505f6770436aef875a750c3ba6c6e0f"
+                "reference": "a1a5b3655539359e7875c698d395dbf1fe34861e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Aggrego/EventConsumer/zipball/6657470b7505f6770436aef875a750c3ba6c6e0f",
-                "reference": "6657470b7505f6770436aef875a750c3ba6c6e0f",
+                "url": "https://api.github.com/repos/Aggrego/EventConsumer/zipball/a1a5b3655539359e7875c698d395dbf1fe34861e",
+                "reference": "a1a5b3655539359e7875c698d395dbf1fe34861e",
                 "shasum": ""
             },
             "require": {
@@ -171,7 +171,7 @@
                     "name": "Tomasz Kunicki"
                 }
             ],
-            "time": "2018-12-20T15:28:12+00:00"
+            "time": "2018-12-27T23:22:57+00:00"
         },
         {
             "name": "aggrego/neo4j-event-consumer",
