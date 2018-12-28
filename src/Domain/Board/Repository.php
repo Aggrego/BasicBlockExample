@@ -24,6 +24,9 @@ class Repository implements DomainRepository
     /** @var string */
     private $dir;
 
+    /** @var array */
+    private $loaded = [];
+
     public function __construct()
     {
         $dir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'AggregoBoardRepository' . DIRECTORY_SEPARATOR;
@@ -40,14 +43,21 @@ class Repository implements DomainRepository
      */
     public function getBoardByUuid(Uuid $uuid): Board
     {
-        $boardUuidValue = $uuid->getValue();
-        $filePath = $this->dir . $boardUuidValue . '.data';
+        $BoardUuidValue = $uuid->getValue();
+        if (isset($this->loaded[$BoardUuidValue])) {
+            return $this->loaded[$BoardUuidValue];
+        }
+
+        $filePath = $this->getSavingPath($uuid);
         if (!file_exists($filePath)) {
-            throw new BoardExistException(sprintf('Given "%s" don\'t exists in "%s"', $boardUuidValue, $filePath));
+            throw new BoardExistException(sprintf('Given "%s" don\'t exists in "%s"', $BoardUuidValue, $filePath));
         }
 
         $content = file_get_contents($filePath);
-        return unserialize($content);
+        $unserialize = unserialize($content);
+        $this->loaded[$BoardUuidValue] = $unserialize;
+
+        return $unserialize;
     }
 
     /**
@@ -56,11 +66,30 @@ class Repository implements DomainRepository
      */
     public function addBoard(Board $board): void
     {
-        $boardUuidValue = $board->getUuid()->getValue();
-        $filePath = $this->dir . $boardUuidValue . '.data';
+        $uuid = $board->getUuid();
+        $filePath = $this->getSavingPath($uuid);
         if (file_exists($filePath)) {
-            throw new BoardExistException(sprintf('Given "%s" exists', $boardUuidValue));
+            throw new BoardExistException(sprintf('Given "%s" exists', $uuid->getValue()));
         }
+
+        $this->saveFile($board);
+    }
+
+    private function saveFile(Board $board): void
+    {
+        $filePath = $this->getSavingPath($board->getUuid());
         file_put_contents($filePath, serialize($board));
+    }
+
+    private function getSavingPath(Uuid $uuid): string
+    {
+        return $filePath = $this->dir . $uuid->getValue() . '.data';
+    }
+
+    public function __destruct()
+    {
+        foreach ($this->loaded as $board) {
+            $this->saveFile($board);
+        }
     }
 }

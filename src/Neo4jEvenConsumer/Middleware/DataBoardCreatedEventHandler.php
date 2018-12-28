@@ -29,16 +29,28 @@ class DataBoardCreatedEventHandler
     public function handle(BoardCreatedEvent $event): void
     {
         $payload = $event->getPayload();
+        $boardUuidValue = $event->getDomain()->getUuid()->getValue();
         $this->client->run(
             'CREATE (b:Event) SET b += {data}',
             ['data' =>
                 [
-                    'domain' => $event->getDomain()->getValue(),
+                    'domain_name' => $event->getDomain()->getName()->getValue(),
+                    'uuid' => $boardUuidValue,
                     'version' => $event->getVersion()->getValue(),
                     'created_at' => $event->createdAt()->getValue(),
                     'payload' => json_encode($payload)
                 ]
             ]
         );
+
+        if ($payload['parent_uuid'] != null) {
+            $this->client->run(
+                'MATCH (u:Event {uuid:{uuid}}), (p:Event {uuid:{parent_uuid}}) CREATE (u)-[:CREATED_FROM]->(p)',
+                [
+                    'uuid' => $boardUuidValue,
+                    'parent_uuid' => $payload['parent_uuid']
+                ]
+            );
+        }
     }
 }
