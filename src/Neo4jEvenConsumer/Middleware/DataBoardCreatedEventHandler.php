@@ -52,5 +52,23 @@ class DataBoardCreatedEventHandler
                 ]
             );
         }
+
+        $this->client->run(
+            'CREATE (b:Board) SET b += {data}',
+            ['data' =>
+                [
+                    'uuid' => $boardUuidValue,
+                    'name' => $payload['metadata']
+                ]
+            ]
+        );
+
+        $this->client->run(
+            'MATCH (u:Event {uuid:{uuid}}), (b:Board {uuid:{board_uuid}}) CREATE (u)<-[:BUILD_FROM]-(b)',
+            [
+                'uuid' => $boardUuidValue,
+                'board_uuid' => $boardUuidValue
+            ]
+        );
     }
 }
