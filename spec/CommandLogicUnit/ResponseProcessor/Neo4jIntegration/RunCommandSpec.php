@@ -11,17 +11,16 @@
 
 declare(strict_types = 1);
 
-namespace spec\Aggrego\BasicBlockExample\Domain\Board;
+namespace spec\Aggrego\BasicBlockExample\CommandLogicUnit\ResponseProcessor\Neo4jIntegration;
 
-use Aggrego\BasicBlockExample\Domain\Board\Repository;
-use Aggrego\Domain\Board\Repository as DomainRepository;
+use Aggrego\BasicBlockExample\CommandLogicUnit\ResponseProcessor\Neo4jIntegration\RunCommand;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 
-class RepositorySpec extends ObjectBehavior
+class RunCommandSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType(Repository::class);
-        $this->shouldHaveType(DomainRepository::class);
+        $this->shouldHaveType(RunCommand::class);
     }
 }
