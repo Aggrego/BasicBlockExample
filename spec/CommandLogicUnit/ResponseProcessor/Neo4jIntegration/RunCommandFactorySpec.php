@@ -14,13 +14,22 @@ declare(strict_types = 1);
 namespace spec\Aggrego\BasicBlockExample\CommandLogicUnit\ResponseProcessor\Neo4jIntegration;
 
 use Aggrego\BasicBlockExample\CommandLogicUnit\ResponseProcessor\Neo4jIntegration\RunCommandFactory;
+use Aggrego\CommandConsumer\Command;
+use Aggrego\CommandConsumer\Response;
+use Aggrego\CommandLogicUnit\ResponseProcessor\Factory;
+use Aggrego\CommandLogicUnit\ResponseProcessor\ResponseProcessor;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class RunCommandFactorySpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
         $this->shouldHaveType(RunCommandFactory::class);
+        $this->shouldBeAnInstanceOf(Factory::class);
+    }
+
+    function it_should_factory(Command $command, Response $response)
+    {
+        $this->create($command, $response)->shouldReturnAnInstanceOf(ResponseProcessor::class);
     }
 }

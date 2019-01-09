@@ -341,12 +341,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Aggrego/Neo4jIntegration.git",
-                "reference": "7854946f800392c9af66baf5931f05b96d7ab9ae"
+                "reference": "d2f1e8ded4c0bf1abe9350bfb460c7e786767301"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Aggrego/Neo4jIntegration/zipball/7854946f800392c9af66baf5931f05b96d7ab9ae",
-                "reference": "7854946f800392c9af66baf5931f05b96d7ab9ae",
+                "url": "https://api.github.com/repos/Aggrego/Neo4jIntegration/zipball/d2f1e8ded4c0bf1abe9350bfb460c7e786767301",
+                "reference": "d2f1e8ded4c0bf1abe9350bfb460c7e786767301",
                 "shasum": ""
             },
             "require": {
@@ -373,7 +373,7 @@
                     "name": "Tomasz Kunicki"
                 }
             ],
-            "time": "2019-01-07T21:11:14+00:00"
+            "time": "2019-01-08T08:21:46+00:00"
         },
         {
             "name": "beberlei/assert",

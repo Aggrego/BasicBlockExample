@@ -19,7 +19,7 @@ use ArrayIterator;
 use Iterator;
 use IteratorAggregate;
 
-class CommandCollection implements CommandCollectionInterface, IteratorAggregate
+class CommandCollection implements IteratorAggregate, CommandCollectionInterface
 {
     /**
      * @var Command[]

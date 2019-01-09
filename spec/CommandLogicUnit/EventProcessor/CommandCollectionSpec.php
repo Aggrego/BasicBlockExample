@@ -22,6 +22,6 @@ class CommandCollectionSpec extends ObjectBehavior
     function it_is_initializable()
     {
         $this->shouldHaveType(CommandCollection::class);
-        $this->shouldBeAnInstanceOf(CommandLogicUnitCommandCollection::class);
+        $this->shouldImplement(CommandLogicUnitCommandCollection::class);
     }
 }
