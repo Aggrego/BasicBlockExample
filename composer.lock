@@ -54,12 +54,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Aggrego/CommandConsumer.git",
-                "reference": "ef6a6933dfabbbaa720c294d2862a7c9f40a4815"
+                "reference": "e5232e5a5f300aba98c3ac63dd5d636acc368f77"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Aggrego/CommandConsumer/zipball/ef6a6933dfabbbaa720c294d2862a7c9f40a4815",
-                "reference": "ef6a6933dfabbbaa720c294d2862a7c9f40a4815",
+                "url": "https://api.github.com/repos/Aggrego/CommandConsumer/zipball/e5232e5a5f300aba98c3ac63dd5d636acc368f77",
+                "reference": "e5232e5a5f300aba98c3ac63dd5d636acc368f77",
                 "shasum": ""
             },
             "require": {
@@ -69,6 +69,8 @@
             },
             "require-dev": {
                 "phpspec/phpspec": "^5.0",
+                "phpstan/phpstan": "^0.10",
+                "squizlabs/php_codesniffer": "3.*",
                 "wikimedia/composer-merge-plugin": "1.4.*"
             },
             "type": "library",
@@ -86,7 +88,7 @@
                     "name": "Tomasz Kunicki"
                 }
             ],
-            "time": "2019-01-04T22:19:55+00:00"
+            "time": "2019-01-09T22:06:48+00:00"
         },
         {
             "name": "aggrego/command-logic-unit",
@@ -94,12 +96,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Aggrego/CommandLogicUnit.git",
-                "reference": "5e03f48cbcec994f96a91a30989c0ed5cf3662af"
+                "reference": "a01adc988741f8bc4f66acac7f3142fdf507b97f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Aggrego/CommandLogicUnit/zipball/5e03f48cbcec994f96a91a30989c0ed5cf3662af",
-                "reference": "5e03f48cbcec994f96a91a30989c0ed5cf3662af",
+                "url": "https://api.github.com/repos/Aggrego/CommandLogicUnit/zipball/a01adc988741f8bc4f66acac7f3142fdf507b97f",
+                "reference": "a01adc988741f8bc4f66acac7f3142fdf507b97f",
                 "shasum": ""
             },
             "require": {
@@ -109,6 +111,8 @@
             },
             "require-dev": {
                 "phpspec/phpspec": "^5.0",
+                "phpstan/phpstan": "^0.10",
+                "squizlabs/php_codesniffer": "3.*",
                 "wikimedia/composer-merge-plugin": "1.4.*"
             },
             "type": "library",
@@ -126,7 +130,7 @@
                     "name": "Tomasz Kunicki"
                 }
             ],
-            "time": "2019-01-04T22:47:51+00:00"
+            "time": "2019-01-09T22:27:07+00:00"
         },
         {
             "name": "aggrego/data-board",
@@ -176,12 +180,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Aggrego/Domain.git",
-                "reference": "1f04af672b8a0ea53a449678ec267da334de4a94"
+                "reference": "9c3e88463fed2b1705b8662559e7837e3bb78234"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Aggrego/Domain/zipball/1f04af672b8a0ea53a449678ec267da334de4a94",
-                "reference": "1f04af672b8a0ea53a449678ec267da334de4a94",
+                "url": "https://api.github.com/repos/Aggrego/Domain/zipball/9c3e88463fed2b1705b8662559e7837e3bb78234",
+                "reference": "9c3e88463fed2b1705b8662559e7837e3bb78234",
                 "shasum": ""
             },
             "require": {
@@ -195,6 +199,8 @@
             "require-dev": {
                 "behat/behat": "^3.4",
                 "phpspec/phpspec": "^5.0",
+                "phpstan/phpstan": "^0.10",
+                "squizlabs/php_codesniffer": "3.*",
                 "timitao/behat-symfony-container": "^1.1",
                 "wikimedia/composer-merge-plugin": "1.4.*"
             },
@@ -213,7 +219,7 @@
                     "name": "Tomasz Kunicki"
                 }
             ],
-            "time": "2019-01-04T23:27:06+00:00"
+            "time": "2019-01-09T22:40:13+00:00"
         },
         {
             "name": "aggrego/domain-event-producer",
@@ -221,12 +227,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Aggrego/DomainEventProducer.git",
-                "reference": "73f6091bced9e71a50369a8d810a4c7bbc9e4ab1"
+                "reference": "0329adacb2b5d80ff5052015346f7aa23857b24b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Aggrego/DomainEventProducer/zipball/73f6091bced9e71a50369a8d810a4c7bbc9e4ab1",
-                "reference": "73f6091bced9e71a50369a8d810a4c7bbc9e4ab1",
+                "url": "https://api.github.com/repos/Aggrego/DomainEventProducer/zipball/0329adacb2b5d80ff5052015346f7aa23857b24b",
+                "reference": "0329adacb2b5d80ff5052015346f7aa23857b24b",
                 "shasum": ""
             },
             "require": {
@@ -236,6 +242,8 @@
             },
             "require-dev": {
                 "phpspec/phpspec": "^5.0",
+                "phpstan/phpstan": "^0.10",
+                "squizlabs/php_codesniffer": "3.*",
                 "wikimedia/composer-merge-plugin": "1.4.*"
             },
             "type": "library",
@@ -253,7 +261,7 @@
                     "name": "Tomasz Kunicki"
                 }
             ],
-            "time": "2019-01-04T23:51:00+00:00"
+            "time": "2019-01-09T22:46:04+00:00"
         },
         {
             "name": "aggrego/event-consumer",
@@ -261,12 +269,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Aggrego/EventConsumer.git",
-                "reference": "2e461e94a4db9d0e74a030004809675a3a6f402e"
+                "reference": "79c8bf58875c282c4808e1a3f4743ec68829e272"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Aggrego/EventConsumer/zipball/2e461e94a4db9d0e74a030004809675a3a6f402e",
-                "reference": "2e461e94a4db9d0e74a030004809675a3a6f402e",
+                "url": "https://api.github.com/repos/Aggrego/EventConsumer/zipball/79c8bf58875c282c4808e1a3f4743ec68829e272",
+                "reference": "79c8bf58875c282c4808e1a3f4743ec68829e272",
                 "shasum": ""
             },
             "require": {
@@ -277,6 +285,8 @@
             },
             "require-dev": {
                 "phpspec/phpspec": "^5.0",
+                "phpstan/phpstan": "^0.10",
+                "squizlabs/php_codesniffer": "3.*",
                 "wikimedia/composer-merge-plugin": "1.4.*"
             },
             "type": "library",
@@ -294,7 +304,7 @@
                     "name": "Tomasz Kunicki"
                 }
             ],
-            "time": "2018-12-28T08:49:53+00:00"
+            "time": "2019-01-09T22:06:48+00:00"
         },
         {
             "name": "aggrego/file-domain-repository",
@@ -302,12 +312,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Aggrego/FileDomainRepository.git",
-                "reference": "c949e3b5ef59540a502b4669f6f6a22f1997df8e"
+                "reference": "bc9ad46401c729eddd09a3bc42a0431601b74a4d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Aggrego/FileDomainRepository/zipball/c949e3b5ef59540a502b4669f6f6a22f1997df8e",
-                "reference": "c949e3b5ef59540a502b4669f6f6a22f1997df8e",
+                "url": "https://api.github.com/repos/Aggrego/FileDomainRepository/zipball/bc9ad46401c729eddd09a3bc42a0431601b74a4d",
+                "reference": "bc9ad46401c729eddd09a3bc42a0431601b74a4d",
                 "shasum": ""
             },
             "require": {
@@ -316,6 +326,8 @@
             },
             "require-dev": {
                 "phpspec/phpspec": "^5.0",
+                "phpstan/phpstan": "^0.10",
+                "squizlabs/php_codesniffer": "3.*",
                 "wikimedia/composer-merge-plugin": "1.4.*"
             },
             "type": "library",
@@ -333,7 +345,7 @@
                     "name": "Tomasz Kunicki"
                 }
             ],
-            "time": "2019-01-05T00:02:57+00:00"
+            "time": "2019-01-09T22:55:29+00:00"
         },
         {
             "name": "aggrego/neo4j-integration",
@@ -643,12 +655,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "c5da4c3128db9f892f0911043cfffb6c559bd6da"
+                "reference": "02411203ceb2de638f80346223e67ddc65be50ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/c5da4c3128db9f892f0911043cfffb6c559bd6da",
-                "reference": "c5da4c3128db9f892f0911043cfffb6c559bd6da",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/02411203ceb2de638f80346223e67ddc65be50ee",
+                "reference": "02411203ceb2de638f80346223e67ddc65be50ee",
                 "shasum": ""
             },
             "require": {
@@ -701,7 +713,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2018-12-21T16:46:01+00:00"
+            "time": "2019-01-11T14:42:53+00:00"
         },
         {
             "name": "guzzlehttp/promises",
@@ -1141,12 +1153,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "d4967c85500c52b01b3fa42ae81ab2ab00b9c10d"
+                "reference": "4a5d48d2ca2422c5c02ed37e4146fb65591369d5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/d4967c85500c52b01b3fa42ae81ab2ab00b9c10d",
-                "reference": "d4967c85500c52b01b3fa42ae81ab2ab00b9c10d",
+                "url": "https://api.github.com/repos/symfony/console/zipball/4a5d48d2ca2422c5c02ed37e4146fb65591369d5",
+                "reference": "4a5d48d2ca2422c5c02ed37e4146fb65591369d5",
                 "shasum": ""
             },
             "require": {
@@ -1202,7 +1214,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2019-01-04T15:14:53+00:00"
+            "time": "2019-01-10T07:43:17+00:00"
         },
         {
             "name": "symfony/contracts",
