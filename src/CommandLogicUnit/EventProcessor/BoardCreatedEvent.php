@@ -16,6 +16,8 @@ namespace Aggrego\BasicBlockExample\CommandLogicUnit\EventProcessor;
 use Aggrego\BasicBlockDomainProfile\Domain\Profile\Factory;
 use Aggrego\CommandLogicUnit\EventProcessor\CommandCollection as CommandLogicUnitCommandCollection;
 use Aggrego\CommandLogicUnit\EventProcessor\EventProcessor;
+use Aggrego\CommandLogicUnit\Shared\EventProcessor\CommandCollection;
+use Aggrego\DataBoard\Board\Events\BoardCreatedEvent as DataBoardCreatedEvent;
 use Aggrego\Domain\Profile\Profile;
 use Aggrego\EventConsumer\Event;
 use Aggrego\EventConsumer\Exception\UnprocessableEventException;
@@ -30,7 +32,7 @@ class BoardCreatedEvent implements EventProcessor
      */
     public function transform(Event $event): CommandLogicUnitCommandCollection
     {
-        if ($event->getName()->getValue() != \Aggrego\DataBoard\Board\Events\BoardCreatedEvent::class) {
+        if ($event->getName()->getValue() != DataBoardCreatedEvent::class) {
             return new CommandCollection();
         }
 

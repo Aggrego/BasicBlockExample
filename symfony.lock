@@ -23,6 +23,9 @@
     "aggrego/file-domain-repository": {
         "version": "dev-master"
     },
+    "aggrego/messenger-command-consumer": {
+        "version": "dev-master"
+    },
     "aggrego/neo4j-integration": {
         "version": "dev-master"
     },
@@ -162,6 +165,9 @@
         "version": "v1.10.0"
     },
     "symfony/polyfill-mbstring": {
+        "version": "v1.10.0"
+    },
+    "symfony/polyfill-php73": {
         "version": "v1.10.0"
     },
     "symfony/process": {

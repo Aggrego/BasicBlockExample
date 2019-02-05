@@ -14,13 +14,13 @@ declare(strict_types = 1);
 namespace spec\Aggrego\BasicBlockExample\Command;
 
 use Aggrego\BasicBlockExample\Command\CreateBoardCommand;
+use Aggrego\CommandConsumer\Client;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Messenger\MessageBusInterface;
 
 class CreateBoardCommandSpec extends ObjectBehavior
 {
-    function let(MessageBusInterface $bus)
+    function let(Client $bus)
     {
         $this->beConstructedWith($bus);
     }

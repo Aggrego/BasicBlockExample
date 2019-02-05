@@ -13,6 +13,7 @@ declare(strict_types = 1);
 
 namespace Aggrego\BasicBlockExample\Command;
 
+use Aggrego\CommandConsumer\Client;
 use Aggrego\Domain\Api\Command\TransformBoard\Command as TransformBoardDomainCommand;
 use Assert\Assertion;
 use Exception;
@@ -21,17 +22,16 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Messenger\MessageBusInterface;
 
 class TransformBoardCommand extends Command
 {
     private const BOARD_UUID = 'board_uuid';
     private const DATA_FILE_SOURCE = 'data_file_source';
 
-    /** @var MessageBusInterface */
+    /** @var Client */
     private $bus;
 
-    public function __construct(MessageBusInterface $bus)
+    public function __construct(Client $bus)
     {
         parent::__construct();
         $this->bus = $bus;
@@ -60,7 +60,7 @@ class TransformBoardCommand extends Command
         if ($data === null) {
             throw new Exception('No data was loaded correctly.');
         }
-        $this->bus->dispatch(
+        $this->bus->consume(
             new TransformBoardDomainCommand(
                 $input->getArgument(self::BOARD_UUID),
                 $data

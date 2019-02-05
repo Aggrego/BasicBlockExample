@@ -17,8 +17,8 @@
     "aggrego/file-domain-repository": "dev-master",
     "aggrego/neo4j-integration": "dev-master",
     "aggrego/command-logic-unit": "dev-master",
+    "aggrego/messenger-command-consumer": "dev-master",
     "symfony/flex": "1.1.*",
-    "symfony/messenger": "^4.2",
     "symfony/console": "^4.2",
     "symfony/dependency-injection": "^4.2"
   },
