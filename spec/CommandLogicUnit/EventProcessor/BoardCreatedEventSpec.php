@@ -14,12 +14,11 @@ declare(strict_types = 1);
 namespace spec\Aggrego\BasicBlockExample\CommandLogicUnit\EventProcessor;
 
 use Aggrego\BasicBlockExample\CommandLogicUnit\EventProcessor\BoardCreatedEvent;
+use Aggrego\CommandLogicUnit\EventProcessor\CommandCollection as CommandLogicUnitCommandCollection;
 use Aggrego\CommandLogicUnit\EventProcessor\EventProcessor;
 use Aggrego\EventConsumer\Event\Name;
 use Aggrego\EventConsumer\Shared\Event;
 use PhpSpec\ObjectBehavior;
-use Aggrego\DataBoard\Board\Events\BoardCreatedEvent as DataBoardCreatedEvent;
-use Aggrego\CommandLogicUnit\EventProcessor\CommandCollection as CommandLogicUnitCommandCollection;
 
 class BoardCreatedEventSpec extends ObjectBehavior
 {

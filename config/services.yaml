@@ -1,169 +1,163 @@
 parameters:
-    locale: 'en'
+  locale: 'en'
 
 services:
-    _defaults:
-        autowire: false
+  _defaults:
+    autowire: false
 
-    Symfony\Component\Console\Application:
-        public: true
+  Symfony\Component\Console\Application:
+    public: true
 
-# Symfony Command
-    aggrego.basic_block_example.command.create_board_command:
-        public: true
-        class: Aggrego\BasicBlockExample\Command\CreateBoardCommand
-        tags: ['console.command']
-        arguments:
-            - '@aggrego.messenger_command_consumer.client'
+  # Symfony Command
+  aggrego.basic_block_example.command.create_board_command:
+    public: true
+    class: Aggrego\BasicBlockExample\Command\CreateBoardCommand
+    tags: ['console.command']
+    arguments:
+      - '@aggrego.messenger_command_consumer.client'
 
-    aggrego.basic_block_example.command.transform_board_command:
-        public: true
-        class: Aggrego\BasicBlockExample\Command\TransformBoardCommand
-        tags: ['console.command']
-        arguments:
-            - '@aggrego.messenger_command_consumer.client'
+  aggrego.basic_block_example.command.transform_board_command:
+    public: true
+    class: Aggrego\BasicBlockExample\Command\TransformBoardCommand
+    tags: ['console.command']
+    arguments:
+      - '@aggrego.messenger_command_consumer.client'
 
-# Symfony Messenger
-    aggrego.messenger_command_consumer.client:
-        class: Aggrego\MessengerCommandConsumer\Client
-        arguments:
-            - '@messenger.bus.command'
+  # Symfony Messenger
+  aggrego.messenger_command_consumer.client:
+    class: Aggrego\MessengerCommandConsumer\Client
+    arguments:
+      - '@messenger.bus.command'
 
-    messenger.bus.command:
-        class: Symfony\Component\Messenger\MessageBus
-        tags: ['messenger.bus']
-        arguments:
-          - ['@messenger.bus.command.middleware.handle_message']
+  messenger.bus.command:
+    class: Symfony\Component\Messenger\MessageBus
+    tags: ['messenger.bus']
+    arguments:
+      - ['@messenger.bus.command.middleware.handle_message']
 
-    messenger.bus.command.middleware.handle_message:
-        class: Symfony\Component\Messenger\Middleware\HandleMessageMiddleware
-        arguments:
-            - [] # Filled by MessengerPass
+  messenger.bus.command.middleware.handle_message:
+    class: Symfony\Component\Messenger\Middleware\HandleMessageMiddleware
+    arguments:
+      - [] # Filled by MessengerPass
 
-    messenger.bus.command.messenger.handlers_locator:
-        class: Symfony\Component\Messenger\Handler\HandlersLocator
-        tags: ['container.service_locator']
-        arguments:
-            - [] # Filled by MessengerPass
+  # Symfony Messenger Debug
+  console.command.messenger_debug:
+    public: true
+    class: Symfony\Component\Messenger\Command\DebugCommand
+    tags: ['console.command']
+    arguments:
+      - [] # Filled by MessengerPass
 
-# Symfony Messenger Debug
-    console.command.messenger_debug:
-        public: true
-        class: Symfony\Component\Messenger\Command\DebugCommand
-        tags: ['console.command']
-        arguments:
-            - [] # Filled by MessengerPass
+  # Domain
+  aggrego.domain_event_producer.handler.create_board:
+    class: Aggrego\DomainEventProducer\Messenger\Handlers\CreateBoardHandler
+    public: true
+    tags: [{name: 'messenger.message_handler', handles: Aggrego\Domain\Api\Command\CreateBoard\Command, method: 'handle', bus: 'messenger.bus.command'}]
+    arguments:
+      - '@aggrego.domain.api.create_board.use_case'
+      - '@aggrego.domain_event_producer.domain.repository'
+      - '@aggrego.command_logic_unit.event_consumer.client'
 
-# Domain
-    aggrego.domain_event_producer.handler.create_board:
-        class: Aggrego\DomainEventProducer\Messenger\Handlers\CreateBoardHandler
-        public: true
-        tags: [{name: 'messenger.message_handler', handles: Aggrego\Domain\Api\Command\CreateBoard\Command, method: 'handle', bus: 'messenger.bus.command'}]
-        arguments:
-            - '@aggrego.domain.api.create_board.use_case'
-            - '@aggrego.domain_event_producer.domain.repository'
-            - '@aggrego.command_logic_unit.event_consumer.client'
+  aggrego.domain_event_producer.handler.transform_board:
+    class: Aggrego\DomainEventProducer\Messenger\Handlers\TransformBoardHandler
+    public: true
+    tags: [{name: 'messenger.message_handler', handles: Aggrego\Domain\Api\Command\TransformBoard\Command, method: 'handle', bus: 'messenger.bus.command'}]
+    arguments:
+      - '@aggrego.domain.api.transform_board.use_case'
+      - '@aggrego.domain_event_producer.domain.repository'
+      - '@aggrego.command_logic_unit.event_consumer.client'
 
-    aggrego.domain_event_producer.handler.transform_board:
-        class: Aggrego\DomainEventProducer\Messenger\Handlers\TransformBoardHandler
-        public: true
-        tags: [{name: 'messenger.message_handler', handles: Aggrego\Domain\Api\Command\TransformBoard\Command, method: 'handle', bus: 'messenger.bus.command'}]
-        arguments:
-            - '@aggrego.domain.api.transform_board.use_case'
-            - '@aggrego.domain_event_producer.domain.repository'
-            - '@aggrego.command_logic_unit.event_consumer.client'
+  aggrego.domain_event_producer.domain.repository:
+    class: Aggrego\DomainEventProducer\Domain\Repository
+    arguments:
+      - '@aggrego.domain.board.repository'
 
-    aggrego.domain_event_producer.domain.repository:
-        class: Aggrego\DomainEventProducer\Domain\Repository
-        arguments:
-            - '@aggrego.domain.board.repository'
+  # Domain Board
+  aggrego.domain.board.repository:
+    alias: 'aggrego.file_domain_repository.domain.board.repository'
 
-# Domain Board
-    aggrego.domain.board.repository:
-        alias: 'aggrego.file_domain_repository.domain.board.repository'
+  aggrego.domain.api.create_board.use_case:
+    class: Aggrego\Domain\Api\Command\CreateBoard\UseCase
+    arguments:
+      - "@aggrego.domain_event_producer.domain.repository"
+      - "@aggrego.domain.board.new_board_factory"
 
-    aggrego.domain.api.create_board.use_case:
-        class: Aggrego\Domain\Api\Command\CreateBoard\UseCase
-        arguments:
-            - "@aggrego.domain_event_producer.domain.repository"
-            - "@aggrego.domain.board.new_board_factory"
+  aggrego.domain.api.transform_board.use_case:
+    class: Aggrego\Domain\Api\Command\TransformBoard\UseCase
+    arguments:
+      - "@aggrego.domain_event_producer.domain.repository"
+      - "@aggrego.domain.board.from_board_factory"
 
-    aggrego.domain.api.transform_board.use_case:
-        class: Aggrego\Domain\Api\Command\TransformBoard\UseCase
-        arguments:
-            - "@aggrego.domain_event_producer.domain.repository"
-            - "@aggrego.domain.board.from_board_factory"
+  aggrego.domain.board.new_board_factory:
+    class: Aggrego\Domain\Board\NewBoardFactory
+    arguments:
+      - ['@aggrego.domain.data_board.board.builder']
+      - "@aggrego.domain.profile.board_construction.factory"
 
-    aggrego.domain.board.new_board_factory:
-        class: Aggrego\Domain\Board\NewBoardFactory
-        arguments:
-            - ['@aggrego.domain.data_board.board.builder']
-            - "@aggrego.domain.profile.board_construction.factory"
+  aggrego.domain.board.from_board_factory:
+    class: Aggrego\Domain\Board\FromBoardFactory
+    arguments:
+      - ['@aggrego.domain.data_board.board.builder']
+      - "@aggrego.domain.profile.board_transformation.factory"
 
-    aggrego.domain.board.from_board_factory:
-        class: Aggrego\Domain\Board\FromBoardFactory
-        arguments:
-            - ['@aggrego.domain.data_board.board.builder']
-            - "@aggrego.domain.profile.board_transformation.factory"
+  # Domain Profile
+  aggrego.domain.profile.board_construction.factory:
+    class: Aggrego\Domain\Profile\BoardConstruction\Factory
+    arguments:
+      - ["@aggrego.basic_block_domain_profile.domain.profile.board_construction.watchman"]
 
-# Domain Profile
-    aggrego.domain.profile.board_construction.factory:
-        class: Aggrego\Domain\Profile\BoardConstruction\Factory
-        arguments:
-            - ["@aggrego.basic_block_domain_profile.domain.profile.board_construction.watchman"]
+  aggrego.domain.profile.board_transformation.factory:
+    class: Aggrego\Domain\Profile\BoardTransformation\Factory
+    arguments:
+      - ["@aggrego.basic_block_domain_profile.domain.profile.board_transformation.watchman"]
 
-    aggrego.domain.profile.board_transformation.factory:
-        class: Aggrego\Domain\Profile\BoardTransformation\Factory
-        arguments:
-            - ["@aggrego.basic_block_domain_profile.domain.profile.board_transformation.watchman"]
+  # Data Board
+  aggrego.domain.data_board.board.builder:
+    class: Aggrego\DataBoard\Board\Builder
 
-# Data Board
-    aggrego.domain.data_board.board.builder:
-        class: Aggrego\DataBoard\Board\Builder
+  # Domain FileRepository
+  aggrego.file_domain_repository.domain.board.repository:
+    class: Aggrego\FileDomainRepository\Domain\Board\Repository
 
-# Domain FileRepository
-    aggrego.file_domain_repository.domain.board.repository:
-        class: Aggrego\FileDomainRepository\Domain\Board\Repository
+  # BasicExample Profile
+  aggrego.basic_block_domain_profile.domain.profile.board_construction.watchman:
+    class: Aggrego\BasicBlockDomainProfile\Domain\Profile\BoardConstruction\Watchman
 
-# BasicExample Profile
-    aggrego.basic_block_domain_profile.domain.profile.board_construction.watchman:
-        class: Aggrego\BasicBlockDomainProfile\Domain\Profile\BoardConstruction\Watchman
+  aggrego.basic_block_domain_profile.domain.profile.board_transformation.watchman:
+    class: Aggrego\BasicBlockDomainProfile\Domain\Profile\BoardTransformation\Watchman
 
-    aggrego.basic_block_domain_profile.domain.profile.board_transformation.watchman:
-        class: Aggrego\BasicBlockDomainProfile\Domain\Profile\BoardTransformation\Watchman
+  # Neo4jIntegration
+  aggrego.neo4j_integration.db_client.factory:
+    class: Aggrego\Neo4jIntegration\Integration\DbClient\Factory
 
-# Neo4jIntegration
-    aggrego.neo4j_integration.db_client.factory:
-        class: Aggrego\Neo4jIntegration\Integration\DbClient\Factory
+  aggrego.neo4j_integration.db_client.client:
+    class: GraphAware\Neo4j\DbClient\Client
+    factory: [ '@aggrego.neo4j_integration.db_client.factory', factory]
+    arguments:
+      - default: 'http://neo4j:aaaaaa@neo4j:7474'
 
-    aggrego.neo4j_integration.db_client.client:
-        class: GraphAware\Neo4j\DbClient\Client
-        factory: [ '@aggrego.neo4j_integration.db_client.factory', factory]
-        arguments:
-            - default: 'http://neo4j:aaaaaa@neo4j:7474'
+  aggrego.neo4j_integration.api.run_command:
+    class: Aggrego\Neo4jIntegration\Api\Command\RunCommand\UseCase
+    public: true
+    tags: [{name: 'messenger.message_handler', handles: Aggrego\Neo4jIntegration\Api\Command\RunCommand\Command, method: 'handle', bus: 'messenger.bus.command'}]
+    arguments:
+      - '@aggrego.neo4j_integration.db_client.client'
 
-    aggrego.neo4j_integration.api.run_command:
-        class: Aggrego\Neo4jIntegration\Api\Command\RunCommand\UseCase
-        public: true
-        tags: [{name: 'messenger.message_handler', handles: Aggrego\Neo4jIntegration\Api\Command\RunCommand\Command, method: 'handle', bus: 'messenger.bus.command'}]
-        arguments:
-            - '@aggrego.neo4j_integration.db_client.client'
+  # CommandLogicUnit
+  aggrego.command_logic_unit.event_consumer.client:
+    class: Aggrego\CommandLogicUnit\EventConsumer\Client
+    arguments:
+      - '@aggrego.basic_block_example.command_logic_unit.event_processor.board.created_event'
+      - '@aggrego.messenger_command_consumer.client'
+      - '@aggrego.basic_block_example.command_logic_unit.response_processor.neo4j_integration.run_command.factory'
+      - '@aggrego.event_consumer.shared.blank_client'
 
-# CommandLogicUnit
-    aggrego.command_logic_unit.event_consumer.client:
-        class: Aggrego\CommandLogicUnit\EventConsumer\Client
-        arguments:
-          - '@aggrego.basic_block_example.command_logic_unit.event_processor.board.created_event'
-          - '@aggrego.messenger_command_consumer.client'
-          - '@aggrego.basic_block_example.command_logic_unit.response_processor.neo4j_integration.run_command.factory'
-          - '@aggrego.event_consumer.shared.blank_client'
+  aggrego.basic_block_example.command_logic_unit.event_processor.board.created_event:
+    class: Aggrego\BasicBlockExample\CommandLogicUnit\EventProcessor\BoardCreatedEvent
 
-    aggrego.basic_block_example.command_logic_unit.event_processor.board.created_event:
-        class: Aggrego\BasicBlockExample\CommandLogicUnit\EventProcessor\BoardCreatedEvent
+  aggrego.basic_block_example.command_logic_unit.response_processor.neo4j_integration.run_command.factory:
+    class: Aggrego\BasicBlockExample\CommandLogicUnit\ResponseProcessor\Neo4jIntegration\RunCommandFactory
 
-    aggrego.basic_block_example.command_logic_unit.response_processor.neo4j_integration.run_command.factory:
-        class: Aggrego\BasicBlockExample\CommandLogicUnit\ResponseProcessor\Neo4jIntegration\RunCommandFactory
-
-# Event Consumer
-    aggrego.event_consumer.shared.blank_client:
-        class: Aggrego\EventConsumer\Shared\BlankClient
+  # Event Consumer
+  aggrego.event_consumer.shared.blank_client:
+    class: Aggrego\EventConsumer\Shared\BlankClient

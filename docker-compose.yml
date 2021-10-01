@@ -2,7 +2,6 @@ version: '2'
 services:
   php:
     image: php:7.1.19-cli-alpine
-    container_name: php
     volumes:
       - ./:/app
     working_dir: /app
@@ -11,7 +10,6 @@ services:
 
   composer:
     image: composer:latest
-    container_name: composer
     volumes_from:
       - php
     working_dir: /app
